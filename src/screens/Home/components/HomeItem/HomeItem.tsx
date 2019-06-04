@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { withNavigation } from 'react-navigation'
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay'
 import styled from 'styled-components'
-import environment from '../../RelayEnvironment'
 
 const getRandomColor = id => {
   const letters = '0123456789ABCDEF'
@@ -13,24 +13,40 @@ const getRandomColor = id => {
   return color
 }
 
-const HomeListContainer = styled.View`
+const HomeListContainer = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${p => getRandomColor(p.id.slice(0, 2))};
+  background-color: ${p => p.color};
 `
-const CharacterImage = styled.Image``
-const CharacterText = styled.Text``
-const CharacterDescription = styled.Text``
+const HomeItemImage = styled.Image`
+  width: 50px;
+  height: 50px;
+`
+const HomeItemText = styled.Text``
+const HomeItemDescription = styled.Text``
+const HomeItemButtonDetail = styled.TouchableHighlight``
+const HomeItemButtonDetailView = styled.View``
+const HomeItemButtonDetailText = styled.Text``
 
 const HomeItem = props => {
   const { character } = props
+  const { id, thumbnail, name, description } = character
+
+  const randomColor = getRandomColor(id.slice(0, 2))
 
   return (
-    <HomeListContainer id={character.id}>
-      <CharacterImage style={{ width: 50, height: 50 }} source={{ uri: character.thumbnail }} />
-      <CharacterText>{character.name}</CharacterText>
-      <CharacterDescription>{character.description}</CharacterDescription>
+    <HomeListContainer color={randomColor}>
+      <HomeItemImage source={{ uri: thumbnail }} />
+      <HomeItemText>{name}</HomeItemText>
+      <HomeItemDescription>{description}</HomeItemDescription>
+      <HomeItemButtonDetail
+        onPress={() => props.navigation.navigate('Character_detail', { character, backgroundColor: randomColor })}
+      >
+        <HomeItemButtonDetailView>
+          <HomeItemButtonDetailText>More information</HomeItemButtonDetailText>
+        </HomeItemButtonDetailView>
+      </HomeItemButtonDetail>
     </HomeListContainer>
   )
 }
@@ -46,8 +62,14 @@ const HomeItemFragmentContainer = createFragmentContainer(HomeItem, {
       urls {
         url
       }
+      stories {
+        resourceURI
+        name
+        role
+        type
+      }
     }
   `,
 })
 
-export default HomeItemFragmentContainer
+export default withNavigation(HomeItemFragmentContainer)
