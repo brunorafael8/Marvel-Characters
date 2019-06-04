@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Swiper from 'react-native-swiper'
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay'
 import styled from 'styled-components'
 import environment from '../../RelayEnvironment'
@@ -15,13 +16,13 @@ const HomeList = styled.FlatList``
 const Home = props => {
   const { characters } = props.query
 
-  renderItem = ({ item }) => {
-    return <HomeItem character={item} />
-  }
-
   return (
     <HomeContainer>
-      <HomeList data={characters} keyExtractor={item => item.id} renderItem={this.renderItem} />
+      <Swiper showsButtons={true} loop={false}>
+        {characters.map(item => (
+          <HomeItem key={item.id} character={item} />
+        ))}
+      </Swiper>
     </HomeContainer>
   )
 }
