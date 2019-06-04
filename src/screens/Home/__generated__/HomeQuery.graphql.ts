@@ -29,6 +29,16 @@ fragment HomeItem_character on Character {
   name
   description
   thumbnail
+  resourceURI
+  urls {
+    url
+  }
+  stories {
+    resourceURI
+    name
+    role
+    type
+  }
 }
 */
 
@@ -51,6 +61,20 @@ v1 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "resourceURI",
   "args": null,
   "storageKey": null
 };
@@ -97,13 +121,7 @@ return {
         "plural": true,
         "selections": [
           (v1/*: any*/),
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "name",
-            "args": null,
-            "storageKey": null
-          },
+          (v2/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -117,6 +135,52 @@ return {
             "name": "thumbnail",
             "args": null,
             "storageKey": null
+          },
+          (v3/*: any*/),
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "urls",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "MarvelUrl",
+            "plural": true,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "url",
+                "args": null,
+                "storageKey": null
+              }
+            ]
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "stories",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Summary",
+            "plural": true,
+            "selections": [
+              (v3/*: any*/),
+              (v2/*: any*/),
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "role",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "type",
+                "args": null,
+                "storageKey": null
+              }
+            ]
           }
         ]
       }
@@ -126,7 +190,7 @@ return {
     "operationKind": "query",
     "name": "HomeQuery",
     "id": null,
-    "text": "query HomeQuery {\n  characters(where: {series: 24229}, orderBy: modified_asc) {\n    id\n    ...HomeItem_character\n  }\n}\n\nfragment HomeItem_character on Character {\n  id\n  name\n  description\n  thumbnail\n}\n",
+    "text": "query HomeQuery {\n  characters(where: {series: 24229}, orderBy: modified_asc) {\n    id\n    ...HomeItem_character\n  }\n}\n\nfragment HomeItem_character on Character {\n  id\n  name\n  description\n  thumbnail\n  resourceURI\n  urls {\n    url\n  }\n  stories {\n    resourceURI\n    name\n    role\n    type\n  }\n}\n",
     "metadata": {}
   }
 };

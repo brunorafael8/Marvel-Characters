@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Swiper from 'react-native-swiper'
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay'
 import styled from 'styled-components'
@@ -9,7 +9,6 @@ const HomeContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding-top: 40px;
 `
 const HomeList = styled.FlatList``
 
