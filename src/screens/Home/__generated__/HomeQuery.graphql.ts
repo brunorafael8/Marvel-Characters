@@ -5,6 +5,7 @@ type HomeItem_character$ref = any;
 export type HomeQueryVariables = {};
 export type HomeQueryResponse = {
     readonly characters: ReadonlyArray<{
+        readonly id: string | null;
         readonly " $fragmentRefs": HomeItem_character$ref;
     }> | null;
 };
@@ -18,8 +19,8 @@ export type HomeQuery = {
 /*
 query HomeQuery {
   characters(where: {series: 24229}, orderBy: modified_asc) {
-    ...HomeItem_character
     id
+    ...HomeItem_character
   }
 }
 
@@ -45,7 +46,14 @@ var v0 = [
       "series": 24229
     }
   }
-];
+],
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+};
 return {
   "kind": "Request",
   "fragment": {
@@ -64,6 +72,7 @@ return {
         "concreteType": "Character",
         "plural": true,
         "selections": [
+          (v1/*: any*/),
           {
             "kind": "FragmentSpread",
             "name": "HomeItem_character",
@@ -87,13 +96,7 @@ return {
         "concreteType": "Character",
         "plural": true,
         "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          },
+          (v1/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -123,10 +126,10 @@ return {
     "operationKind": "query",
     "name": "HomeQuery",
     "id": null,
-    "text": "query HomeQuery {\n  characters(where: {series: 24229}, orderBy: modified_asc) {\n    ...HomeItem_character\n    id\n  }\n}\n\nfragment HomeItem_character on Character {\n  id\n  name\n  description\n  thumbnail\n}\n",
+    "text": "query HomeQuery {\n  characters(where: {series: 24229}, orderBy: modified_asc) {\n    id\n    ...HomeItem_character\n  }\n}\n\nfragment HomeItem_character on Character {\n  id\n  name\n  description\n  thumbnail\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '111db430e928e7e1f3295081b0fc9296';
+(node as any).hash = '8f3533c6b9ac41b3dc80d65f723c06bf';
 export default node;

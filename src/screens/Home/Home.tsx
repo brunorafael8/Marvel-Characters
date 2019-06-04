@@ -10,19 +10,18 @@ const HomeContainer = styled.View`
   align-items: center;
   padding-top: 40px;
 `
-const HomeList = styled.ScrollView``
-const CharacterText = styled.Text``
-const CharacterImage = styled.Image``
+const HomeList = styled.FlatList``
 
 const Home = props => {
   const { characters } = props.query
+
+  renderItem = ({ item }) => {
+    return <HomeItem character={item} />
+  }
+
   return (
     <HomeContainer>
-      <HomeList>
-        {characters.map(character => (
-          <HomeItem key={character.id} character={character} />
-        ))}
-      </HomeList>
+      <HomeList data={characters} keyExtractor={item => item.id} renderItem={this.renderItem} />
     </HomeContainer>
   )
 }
@@ -30,6 +29,7 @@ const Home = props => {
 const query = graphql`
   query HomeQuery {
     characters(where: { series: 24229 }, orderBy: modified_asc) {
+      id
       ...HomeItem_character
     }
   }
