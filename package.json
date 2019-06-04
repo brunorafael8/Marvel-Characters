@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "relay": "relay-compiler --src ./src --schema schema.graphql --language typescript",
+    "get-schema": "node scripts/createGithubSchema.js",
     "test": "jest"
   },
   "dependencies": {
