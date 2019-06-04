@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay'
 import styled from 'styled-components'
 import environment from '../../RelayEnvironment'
+import HomeItem from './components/HomeItem'
 
 const HomeContainer = styled.View`
   flex: 1;
@@ -18,11 +19,8 @@ const Home = props => {
   return (
     <HomeContainer>
       <HomeList>
-        {characters.map(char => (
-          <>
-            <CharacterText>{char.name}</CharacterText>
-            <CharacterImage style={{ width: 50, height: 50 }} source={{ uri: char.thumbnail }} />
-          </>
+        {characters.map(character => (
+          <HomeItem key={character.id} character={character} />
         ))}
       </HomeList>
     </HomeContainer>
@@ -32,10 +30,7 @@ const Home = props => {
 const query = graphql`
   query HomeQuery {
     characters(where: { series: 24229 }, orderBy: modified_asc) {
-      id
-      name
-      description
-      thumbnail
+      ...HomeItem_character
     }
   }
 `
