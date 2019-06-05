@@ -1,7 +1,8 @@
 import React from 'react'
-import { withNavigation } from 'react-navigation'
+import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay'
 import styled from 'styled-components'
+import { HomeItem_character } from './__generated__/HomeItem_character.graphql.ts'
 
 const getRandomColor = id => {
   const letters = '0123456789ABCDEF'
@@ -28,6 +29,11 @@ const HomeItemDescription = styled.Text``
 const HomeItemButtonDetail = styled.TouchableHighlight``
 const HomeItemButtonDetailView = styled.View``
 const HomeItemButtonDetailText = styled.Text``
+
+export interface HomeItemProps {
+  character: HomeItem_character
+  navigation: NavigationScreenProp<>
+}
 
 const HomeItem = props => {
   const { character } = props

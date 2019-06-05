@@ -1,6 +1,7 @@
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { NavigationScreenProp } from 'react-navigation'
 import styled from 'styled-components'
 
 const CharacterDetailContainer = styled.SafeAreaView`
@@ -65,7 +66,24 @@ const CharacterStoriesItem = styled.Text`
   font-size: 16px;
 `
 
-const CharacterDetail = props => {
+export interface CharacterParam {
+  id: string
+  thumbnail: string
+  name: string
+  description: string
+  stories: string[]
+}
+
+export interface NavigationParams {
+  character: CharacterParam
+  backgroundColor: string
+}
+
+export interface CharacterDetailProps {
+  navigation: NavigationScreenProp<NavigationParams>
+}
+
+const CharacterDetail = (props: CharacterDetailProps) => {
   const character = props.navigation.getParam('character', {})
   const bgColor = props.navigation.getParam('backgroundColor', '#ffffff')
 

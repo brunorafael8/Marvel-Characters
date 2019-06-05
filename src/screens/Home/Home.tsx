@@ -1,8 +1,10 @@
 import React from 'react'
 import Swiper from 'react-native-swiper'
+import { NavigationScreenProp } from 'react-navigation'
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay'
 import styled from 'styled-components'
 import environment from '../../RelayEnvironment'
+import { HomeQueryResponse } from './__generated__/HomeQuery.graphql.ts'
 import HomeItem from './components/HomeItem'
 
 const HomeContainer = styled.View`
@@ -12,7 +14,12 @@ const HomeContainer = styled.View`
 `
 const HomeList = styled.FlatList``
 
-const Home = props => {
+export interface HomeProps {
+  character: HomeQueryResponse
+  navigation: NavigationScreenProp<>
+}
+
+const Home = (props: HomeProps) => {
   const { characters } = props.query
 
   return (
