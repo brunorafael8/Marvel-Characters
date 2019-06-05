@@ -9,6 +9,7 @@
       "no-console": [true, "debug", "dir", "log", "trace", "warn"],
       "no-empty-interface": false,
       "no-namespace": false,
+      "jsx-boolean-value": false,
       "member-access": false,
       "jsx-no-lambda": false,
       "object-shorthand-properties-first": false,
