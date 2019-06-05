@@ -1,16 +1,7 @@
 import React from 'react'
 import { SafeAreaView } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components'
-
-const getRandomColor = id => {
-  const letters = '0123456789ABCDEF'
-  let color = '#'
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * id)]
-  }
-
-  return color
-}
 
 const CharacterDetailContainer = styled.SafeAreaView`
   flex: 1;
@@ -18,26 +9,43 @@ const CharacterDetailContainer = styled.SafeAreaView`
   align-items: flex-start;
   background-color: ${p => p.color};
 `
+const CharacterDetailBackButton = styled.TouchableHighlight`
+  padding: 10px 0 10px 20px;
+`
+
 const CharacterDetailContent = styled.View`
-  padding: 20px;
+  padding: 0 0 0 20px;
 `
 
 const CharacterImage = styled.Image`
   width: 200px;
   height: 200px;
 `
-const CharacterText = styled.Text`
+
+const CharacterDetailNameContent = styled.View`
+  flex-direction: row;
+  margin-top: 10px;
+`
+
+const CharacterDetailNameTitle = styled.Text`
   color: #000;
   font-weight: bold;
   font-size: 25px;
-  margin-top: 10px;
+`
+const CharacterDetailNameText = styled.Text`
+  color: #000;
+  font-weight: normal;
+  font-size: 25px;
+  margin-left: 5px;
 `
 const CharacterDescription = styled.Text`
   color: #000;
   font-weight: normal;
   font-size: 16px;
 `
-const CharacterStories = styled.FlatList``
+const CharacterStories = styled.FlatList`
+  width: 100%;
+`
 
 const CharacterStoriesHeader = styled.View`
   margin: 10px 0 20px 0;
@@ -65,10 +73,16 @@ const CharacterDetail = props => {
 
   return (
     <CharacterDetailContainer color={bgColor}>
+      <CharacterDetailBackButton onPress={() => props.navigation.goBack()}>
+        <Icon name="md-arrow-round-back" size={30} color="#000" />
+      </CharacterDetailBackButton>
       <CharacterDetailContent>
         <CharacterImage source={{ uri: thumbnail }} />
-        <CharacterText>{name}</CharacterText>
-        <CharacterDescription>{description}</CharacterDescription>
+        <CharacterDetailNameContent>
+          <CharacterDetailNameTitle>Name:</CharacterDetailNameTitle>
+          <CharacterDetailNameText>{name}</CharacterDetailNameText>
+        </CharacterDetailNameContent>
+        <CharacterDescription>Description:{description}</CharacterDescription>
         <CharacterStories
           data={stories}
           ListHeaderComponent={
